@@ -28,7 +28,7 @@ jobs:
           # Force stop and delete the broken instance
           colima delete -f
           rm -rf ~/.colima ~/.lima
-          colima start --driver qemu --cpu 2 --memory 4
+          colima start --cpu 2 --memory 4
           # Point the docker CLI to the colima socket
           sudo ln -sf ~/.colima/default/docker.sock /var/run/docker.sock
 
