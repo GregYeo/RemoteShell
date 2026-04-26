@@ -22,9 +22,6 @@ jobs:
         if: runner.os == 'macOS'
         run: brew install sshpass cmake
 
-      - name: Install dependencies
-        run: sudo apt-get install -y sshpass build-essential cmake
-
       - name: Configure and Build
         run: cmake -B cmake-build-debug -DCMAKE_BUILD_TYPE=Release
 
