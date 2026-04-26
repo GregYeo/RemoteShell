@@ -44,8 +44,12 @@ Config parse_config(const fs::path& config_path) {
 }
 
 int main(int argc, char* argv[]) {
+    constexpr std::string binary_name = "rex";
+    std::string default_yaml_filename = std::string(binary_name) + ".yaml";
+    std::string default_yml_filename = std::string(binary_name) + ".yml";
+
     if (argc < 2) {
-        std::cerr << "Usage: rs <command>" << std::endl;
+        std::cerr << "Usage: "<< binary_name << " <command>" << std::endl;
         return 1;
     }
 
@@ -55,12 +59,12 @@ int main(int argc, char* argv[]) {
 
     // 1. Locate Root Logic (Supporting .yaml and .yml)
     while (true) {
-        if (fs::exists(current / "rex.yaml")) {
-            config_path = current / "rex.yaml";
+        if (fs::exists(current / default_yaml_filename)) {
+            config_path = current / default_yaml_filename;
             found = true;
             break;
-        } else if (fs::exists(current / "rex.yml")) {
-            config_path = current / "rex.yml";
+        } else if (fs::exists(current / default_yml_filename)) {
+            config_path = current / default_yml_filename;
             found = true;
             break;
         }
@@ -70,7 +74,7 @@ int main(int argc, char* argv[]) {
     }
 
     if (!found) {
-        std::cerr << "Error: rex.yaml or rex.yml not found in this or any parent directory." << std::endl;
+        std::cerr << "Error: "<< default_yaml_filename << " or " << default_yml_filename << " not found in this or any parent directory." << std::endl;
         return 1;
     }
 
